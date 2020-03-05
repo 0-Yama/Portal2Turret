@@ -21,3 +21,11 @@
 	<stdlib.h>
 	<stdio.h>
 
+1583441875 source:c:\users\o-yama\desktop\portal2turret\main.cpp
+	<windows.h>
+	<GLUT/glut.h>
+	<math.h>
+	<glut.h>
+	<stdlib.h>
+	<stdio.h>
+

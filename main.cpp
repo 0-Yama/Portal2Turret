@@ -129,28 +129,8 @@ void display(){
 	/* A vous de jouer */
 
     glPushMatrix();
-        float scale = 0.125;
-        glScalef(scale,scale,scale);
-        for(float x = 0;x<=3;x+=0.00001){
-            glBegin(GL_TRIANGLES);
-
-                glVertex3f(0,0,0);   glVertex3f(0,F1x(x),0);   glVertex3f(x,F1x(x),F2x(x));
-                glVertex3f(0,0,0);   glVertex3f(0,F1x(x),0);   glVertex3f(-x,F1x(x),F2x(x));
-
-                if(x<=2){
-                    if(x<1.5){
-                        glVertex3f(0,F1x(3),0);   glVertex3f(0,F1x(3)+F1x(x),0);   glVertex3f(x/3+3,F1x(3)+F1x(x),F2x(x/3+3));
-                        glVertex3f(0,F1x(3),0);   glVertex3f(0,F1x(3)+F1x(x),0);   glVertex3f(-(x/3+3),F1x(3)+F1x(x),F2x(x/3+3));
-                    }else{
-                        glVertex3f(0,F1x(3),0);   glVertex3f(0,F1x(3)+F1x(x),0);   glVertex3f(((3-x)/3)+3,F1x(3)+F1x(x),F2x(x/3+3));
-                        glVertex3f(0,F1x(3),0);   glVertex3f(0,F1x(3)+F1x(x),0);   glVertex3f(-(((3-x)/3)+3),F1x(3)+F1x(x),F2x(x/3+3));
-                    }
-
-                }
-
-
-            glEnd();
-        }
+        glScalef(0,0,0);
+        glutSolidSphere(0.5, 50, 50);
 
     glPopMatrix();
 
