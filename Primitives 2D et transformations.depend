@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1361143254 source:c:\users\bah.marc_pc\desktop\marc\marc\cours-td-ecoles\projets c pr l'ece et l'esgi\esgi\tp étudiants\primitives 2d et transformations\main.cpp
+	<windows.h>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<stdlib.h>
+	<stdio.h>
+
+1361143256 source:c:\users\marc\desktop\marc\cours-td-ecoles\esgi\infographie\2i\enoncés tp\esgi\tp étudiants\tp étudiants\primitives 2d et transformations\main.cpp
+	<windows.h>
+	<GLUT/glut.h>
+	<GL/glut.h>
+	<stdlib.h>
+	<stdio.h>
+
+1581436527 source:c:\users\pc-lylian\desktop\primitives 2d et transformations\main.cpp
+	<windows.h>
+	<GLUT/glut.h>
+	<glut.h>
+	<stdlib.h>
+	<stdio.h>
+
+1581519108 source:c:\users\pc-lylian\desktop\portal turret\main.cpp
+	<windows.h>
+	<GLUT/glut.h>
+	<glut.h>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+
