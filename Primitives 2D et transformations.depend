@@ -13,18 +13,11 @@
 	<stdlib.h>
 	<stdio.h>
 
-1581436527 source:c:\users\pc-lylian\desktop\primitives 2d et transformations\main.cpp
+1582630649 source:c:\users\pc-lylian\desktop\primitives 2d et transformations\main.cpp
 	<windows.h>
 	<GLUT/glut.h>
-	<glut.h>
-	<stdlib.h>
-	<stdio.h>
-
-1581519108 source:c:\users\pc-lylian\desktop\portal turret\main.cpp
-	<windows.h>
-	<GLUT/glut.h>
-	<glut.h>
-	<stdlib.h>
-	<stdio.h>
 	<math.h>
+	<glut.h>
+	<stdlib.h>
+	<stdio.h>
 

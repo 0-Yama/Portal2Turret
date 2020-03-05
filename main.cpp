@@ -20,27 +20,36 @@
 #else
 //#include <GL/glut.h>
 #endif
-
+#include<math.h>
 #include<glut.h>
 #include<stdlib.h>
 #include<stdio.h>
-#include <math.h>
 
 
 
 
-float angleS = 0.0;
-float angleB = 0.0;
-int   value  = 0;
-int   way    = -1;
-float sizeB  = 1;
-float sizeAB = 1;
+float alpha    = 0.0;
+float phi      = 0.0;
+float rayon    = 5.0;
+float pasAngle = 0.1;
+float pasRayon = 0.1;
 /* prototypes de fonctions */
 void initRendering();                           // Initialisation du rendu
 void display();                             // modélisation
 void reshape(int w,int h);                      // visualisation
 void update(int value);                         // mise à jour: appelle Timer pour l'animation de la scène
 void keyboard(unsigned char key, int x, int y); // fonction clavier
+
+
+
+
+float F1x(float x){
+    return x*x-0.25*x;
+}
+float F2x(float x){
+    return x*x*0.25;
+}
+
 
 /* Programme principal */
 int main(int argc,       // argc: nombre d'arguments, argc vaut au moins 1
@@ -108,70 +117,42 @@ void display(){
 	/* Permet de créer un point de vue. Définit une matrice de modélisation-visualisation et la multiplie
 	à droite de lma matrice active, ici l'identité*/
 
-	gluLookAt(0.0, 0.0, 5.0,      // position caméra
+	gluLookAt((rayon*cos(phi)*sin(alpha)), (rayon*sin(phi)), (rayon*cos(phi)*cos(alpha)),      // position caméra
 		      0.0, 0.0, 0.0,      // point de mire
 			  0.0, 1.0, 0.0);     // vecteur d'orientation caméra
 
 
-    glPushMatrix();
-        glTranslatef(0,-1,0);
-        for(float i = 1;i<=3000;i++){
-            glPushMatrix();
-                glBegin(GL_TRIANGLES);
-                    glVertex2f(0.0,0.0);
-                    glVertex2f(0.0,0.3);
-                    glVertex2f(i/1000*i/1000,i/1000);
-                glEnd();
-            glPopMatrix();
-        }
-        glBegin(GL_TRIANGLES);
 
-            glVertex2f(0.0,0.3);    glVertex2f(0.3,0.3);    glVertex2f(0.0,0.6);
-            glVertex2f(0.0,0.6);    glVertex2f(0.4,0.6);    glVertex2f(0.3,0.3);
-            glVertex2f(0.0,0.6);    glVertex2f(0.0,0.9);    glVertex2f(0.4,0.6);
-            glVertex2f(0.0,0.9);    glVertex2f(0.0,1.3);    glVertex2f(0.4,1.3);
-            glVertex2f(0.0,0.9);    glVertex2f(0.4,0.6);    glVertex2f(0.5,0.8);
-            glVertex2f(0.0,0.9);    glVertex2f(0.5,0.8);    glVertex2f(0.5,1.0);
-            glVertex2f(0.0,0.9);    glVertex2f(0.4,1.3);    glVertex2f(0.5,1.0);
-            glVertex2f(0.0,1.3);    glVertex2f(0.4,1.3);    glVertex2f(0.3,1.5);
-            glVertex2f(0.0,1.3);    glVertex2f(0.3,1.5);    glVertex2f(0.2,1.6);
-            glVertex2f(0.0,1.3);    glVertex2f(0.0,1.6);    glVertex2f(0.2,1.6);
-            glVertex2f(0.2,1.6);    glVertex2f(0.0,1.6);    glVertex2f(0.3,1.8);
-            glVertex2f(0.3,1.8);    glVertex2f(0.0,1.8);    glVertex2f(0.0,1.6);
-            glVertex2f(0.0,1.8);    glVertex2f(0.3,1.8);    glVertex2f(0.5,2.0);
-            glVertex2f(0.0,1.8);    glVertex2f(0.0,2.1);    glVertex2f(0.5,2.0);
-            glVertex2f(0.0,2.1);    glVertex2f(0.5,2.0);    glVertex2f(0.5,2.1);
-            glVertex2f(0.0,2.1);    glVertex2f(0.5,2.1);    glVertex2f(0.4,2.2);
-            glVertex2f(0.0,2.3);    glVertex2f(0.0,2.1);    glVertex2f(0.4,2.2);
-
-            glVertex2f(-0.0,0.0);    glVertex2f(-0.0,0.3);    glVertex2f(-0.2,0.1);
-            glVertex2f(-0.0,0.3);    glVertex2f(-0.3,0.3);    glVertex2f(-0.2,0.1);
-            glVertex2f(-0.0,0.3);    glVertex2f(-0.3,0.3);    glVertex2f(-0.0,0.6);
-            glVertex2f(-0.0,0.6);    glVertex2f(-0.4,0.6);    glVertex2f(-0.3,0.3);
-            glVertex2f(-0.0,0.6);    glVertex2f(-0.0,0.9);    glVertex2f(-0.4,0.6);
-            glVertex2f(-0.0,0.9);    glVertex2f(-0.0,1.3);    glVertex2f(-0.4,1.3);
-            glVertex2f(-0.0,0.9);    glVertex2f(-0.4,0.6);    glVertex2f(-0.5,0.8);
-            glVertex2f(-0.0,0.9);    glVertex2f(-0.5,0.8);    glVertex2f(-0.5,1.0);
-            glVertex2f(-0.0,0.9);    glVertex2f(-0.4,1.3);    glVertex2f(-0.5,1.0);
-            glVertex2f(-0.0,1.3);    glVertex2f(-0.4,1.3);    glVertex2f(-0.3,1.5);
-            glVertex2f(-0.0,1.3);    glVertex2f(-0.3,1.5);    glVertex2f(-0.2,1.6);
-            glVertex2f(-0.0,1.3);    glVertex2f(-0.0,1.6);    glVertex2f(-0.2,1.6);
-            glVertex2f(-0.2,1.6);    glVertex2f(-0.0,1.6);    glVertex2f(-0.3,1.8);
-            glVertex2f(-0.3,1.8);    glVertex2f(-0.0,1.8);    glVertex2f(-0.0,1.6);
-            glVertex2f(-0.0,1.8);    glVertex2f(-0.3,1.8);    glVertex2f(-0.5,2.0);
-            glVertex2f(-0.0,1.8);    glVertex2f(-0.0,2.1);    glVertex2f(-0.5,2.0);
-            glVertex2f(-0.0,2.1);    glVertex2f(-0.5,2.0);    glVertex2f(-0.5,2.1);
-            glVertex2f(-0.0,2.1);    glVertex2f(-0.5,2.1);    glVertex2f(-0.4,2.2);
-            glVertex2f(-0.0,2.3);    glVertex2f(-0.0,2.1);    glVertex2f(-0.4,2.2);
-/**/
-        glEnd();
-    glPopMatrix();
 
 
 
 	/* A vous de jouer */
 
+    glPushMatrix();
+        float scale = 0.125;
+        glScalef(scale,scale,scale);
+        for(float x = 0;x<=3;x+=0.00001){
+            glBegin(GL_TRIANGLES);
 
+                glVertex3f(0,0,0);   glVertex3f(0,F1x(x),0);   glVertex3f(x,F1x(x),F2x(x));
+                glVertex3f(0,0,0);   glVertex3f(0,F1x(x),0);   glVertex3f(-x,F1x(x),F2x(x));
+
+                if(x<=2){
+                    if(x<1.5){
+                        glVertex3f(0,F1x(3),0);   glVertex3f(0,F1x(3)+F1x(x),0);   glVertex3f(x/3+3,F1x(3)+F1x(x),F2x(x/3+3));
+                        glVertex3f(0,F1x(3),0);   glVertex3f(0,F1x(3)+F1x(x),0);   glVertex3f(-(x/3+3),F1x(3)+F1x(x),F2x(x/3+3));
+                    }else{
+                        glVertex3f(0,F1x(3),0);   glVertex3f(0,F1x(3)+F1x(x),0);   glVertex3f(((3-x)/3)+3,F1x(3)+F1x(x),F2x(x/3+3));
+                        glVertex3f(0,F1x(3),0);   glVertex3f(0,F1x(3)+F1x(x),0);   glVertex3f(-(((3-x)/3)+3),F1x(3)+F1x(x),F2x(x/3+3));
+                    }
+
+                }
+
+
+            glEnd();
+        }
+
+    glPopMatrix();
 
 
 	/* On swap (échange) les buffers, càd, on fait passer l'image calculée et dessinée
@@ -213,7 +194,31 @@ void keyboard(unsigned char key,       // Touche qui a été pressée
                     int x, int y) {    // Coordonnées courante de la souris
 
 		switch (key){
-			case 'q':   /* Quitter le programme */
+            case 's':
+                phi+=phi<3.14/2-pasAngle?pasAngle:0;
+                glutPostRedisplay();
+                break;
+             case 'z':
+                phi-=phi>-3.14/2+pasAngle?pasAngle:0;
+                glutPostRedisplay();
+                break;
+            case 'd':
+                alpha-=alpha==0?6.28:pasAngle;
+                glutPostRedisplay();
+                break;
+             case 'q':
+                alpha+=alpha==6.28?-6.28:pasAngle;
+                glutPostRedisplay();
+                break;
+            case 'a':
+                rayon+=pasRayon;
+                glutPostRedisplay();
+                break;
+             case 'e':
+                rayon-=rayon==3?0:pasRayon;
+                glutPostRedisplay();
+                break;
+			case 'w':   /* Quitter le programme */
 				exit(0);
 		}
 }
